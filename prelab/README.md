@@ -9,7 +9,7 @@ Insert your truth table here
 ### Boolean Equation
 
 $$
-Y = ?
+Y = AC'D' + ACD' + A'D
 $$
 
 ### Digital Simulations
