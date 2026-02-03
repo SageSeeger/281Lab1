@@ -1,5 +1,5 @@
 # ECE 281 Lab 1 Prelab
-
+Documentation: I compared schematic drawings with C3C Joshua Smith, C3C Max Starkman and C3C Malachi Rowe
 ## Prelab questions
 
 ### Truth Table
