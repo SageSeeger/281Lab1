@@ -56,24 +56,50 @@ library ieee;
 entity thirtyOneDayMonth is 
   port(
 	i_A : in std_logic; -- one of four inputs
+	i_B : in std_logic;
+	i_C : in std_logic;
+	i_D : in std_logic;
 	
-	
-	
-						-- output
+	o_Y : out std_logic					-- output
   );
 end thirtyOneDayMonth;
+
+library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
+entity MUX_4T1 is
+    Port( SEL : in std_logic_vector(1 downto 0);
+         D_IN : in std_logic_vector(3 downto 0);
+            F : out std_logic);
+end MUX_4T1;
 
 architecture thirtyOneDayMonth_arch of thirtyOneDayMonth is 
 	-- include components declarations and signals
 	
 	--signals internal to the architecture are declared and initialized such as w_sel
-  
+    signal w_sel : std_logic_vector(1 downto 0);
 begin
 	-- CONCURRENT STATEMENTS---------------------------------------
 	--assigning names to reflect original schematics (for ease of understanding if you wish to)
-	w_sel(0) <= i_C;	-- one
+	w_sel(0) <= i_D;	-- 0
+	w_sel(1) <= i_A; -- one
 	--finish assigning signals
 	
-	--enter your logic here to implement the mux.  See VHDL reference sheet for MUX syntax.	
-	---------------------------------------------------------------	
+    U_MUX : entity work.MUX_4T1
+        port map (
+        SEL => w_sel,
+        D_IN => "0110",
+        F => o_Y
+        );
+	--enter your logic here to implement the mux.  See VHDL reference sheet for MUX syntax.		---------------------------------------------------------------	
 end thirtyOneDayMonth_arch;
+
+architecture my_mux of MUX_4T1 is   
+begin
+    F <= D_IN(0) when (SEL = "00") else
+         D_IN(1) when (SEL = "01") else
+         D_IN(2) when (SEL = "10") else
+         D_IN(3) when (SEL = "11") else
+         '0';
+         
+end my_mux;
